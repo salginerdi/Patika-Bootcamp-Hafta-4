@@ -67,6 +67,20 @@ public abstract class BattleLoc extends Location {
                 e.printStackTrace();
             }
             System.out.println(this.getName() + "You have defeated all obstacles!");
+            switch (this.award) {
+                case "Food!":
+                    System.out.println("You won the food!");
+                    getPlayer().getInventory().setFood(true);
+                    break;
+                case "Water!":
+                    System.out.println("You won the water!");
+                    getPlayer().getInventory().setWater(true);
+                    break;
+                case "Firewood!":
+                    System.out.println("You won the firewood!");
+                    getPlayer().getInventory().setFirewood(true);
+                    break;
+            }
             return true;
 
         }
@@ -79,6 +93,8 @@ public abstract class BattleLoc extends Location {
 
     public boolean combat(int obsNumber) {
         for (int i = 1; i <= obsNumber; i++) {
+            Mine mine = new Mine(getPlayer());
+
             this.getObstacle().setHealth(this.getObstacle().getDefaultHealth());
             playerStats();
             obstacleStats(i);
@@ -113,7 +129,13 @@ public abstract class BattleLoc extends Location {
             }
             if (this.getObstacle().getHealth() < this.getPlayer().getHealth()) {
                 System.out.println("Congratulations, You Won!");
-                System.out.println(this.getObstacle().getAward() + " you have won coin!");
+                if (this.getObstacle().getName().equals("Snake")) {
+                    System.out.println(mine.getMessage());
+                }
+                System.out.println();
+                if (!getObstacle().getName().equals("Snake")) {
+                    System.out.println(this.getObstacle().getAward() + " you have won coin!");
+                }
                 this.getPlayer().setCoin(this.getPlayer().getCoin() + this.getObstacle().getAward());
                 System.out.println("Your current coin: " + this.getPlayer().getCoin());
             } else {

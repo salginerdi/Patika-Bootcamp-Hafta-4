@@ -47,6 +47,10 @@ public class Game {
         // içerisine yerleştirdik.
         Location location = null;
         while (true) {
+            if(player.getInventory().isFood() && player.getInventory().isWater() && player.getInventory().isFirewood()){
+                System.out.println("Congratulations, You Won The Game");
+                break;
+            }
             player.printInfo();
             System.out.println();
             System.out.println("Locations:");
@@ -83,14 +87,29 @@ public class Game {
                     location = new ToolStore(player);
                     break;
                 case 3:
-                    location = new Cave(player);
-                    break;
+                    if(player.getInventory().isFood()){
+                        System.out.println("You can't enter this area!");
+                        continue;
+                    }else{
+                        location = new Cave(player);
+                        break;
+                    }
                 case 4:
-                    location = new Forest(player);
-                    break;
+                    if(player.getInventory().isFirewood()){
+                        System.out.println("You can't enter this area!");
+                        continue;
+                    }else{
+                        location = new Forest(player);
+                        break;
+                    }
                 case 5:
-                    location = new River(player);
-                    break;
+                    if(player.getInventory().isWater()){
+                        System.out.println("You can't enter this area!");
+                        continue;
+                    }else{
+                        location = new River(player);
+                        break;
+                    }
                 case 6:
                     location = new Mine(player);
                     break;

@@ -1,5 +1,8 @@
 public class Inventory {
     private Weapons weapons;
+    private boolean food;
+    private boolean water;
+    private boolean firewood;
 
     private Armors armors;
 
@@ -22,5 +25,29 @@ public class Inventory {
 
     public void setArmors(Armors armors) {
         this.armors = armors;
+    }
+
+    public boolean isFood() {
+        return food;
+    }
+
+    public void setFood(boolean food) {
+        this.food = food;
+    }
+
+    public boolean isWater() {
+        return water;
+    }
+
+    public void setWater(boolean water) {
+        this.water = water;
+    }
+
+    public boolean isFirewood() {
+        return firewood;
+    }
+
+    public void setFirewood(boolean firewood) {
+        this.firewood = firewood;
     }
 }
